@@ -1,5 +1,12 @@
 BreadExpress::Application.routes.draw do
 
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
+  get "items/show"
+  get "items/edit"
+  get "items/update"
+  get "items/destroy"
   # Routes for main resources
   resources :addresses
   resources :customers
