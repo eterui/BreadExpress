@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # authorize_resource
+  authorize_resource
 
   def index
     @users = User.alphabetical.paginate(:page => params[:page]).per_page(10)
@@ -54,10 +54,8 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      if current_user && current_user.role?(:admin)
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role, :active)  
-      else
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :active)
-      end
+      if current_user
+        params.require(:user).permit(:username, :password, :password_confirmation, :role, :active) 
+      end 
     end
 end
