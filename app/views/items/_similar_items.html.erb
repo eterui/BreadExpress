@@ -7,7 +7,7 @@
     <th></th>
   </tr>
 
-  <% Item.for_category(@item.category).alphabetical.each do |item| %>
+  <% @items_for_category.each do |item| %>
     <tr>
      	<td><%= link_to item.name, item_path(item) %></td> 
       <td><%= item.description %></td>

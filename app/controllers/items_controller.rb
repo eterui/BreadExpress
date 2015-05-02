@@ -7,6 +7,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @items_for_category = Item.for_category(@item.category).alphabetical
+    @item_prices = ItemPrice.for_item(@item).chronological
   end
 
   def new

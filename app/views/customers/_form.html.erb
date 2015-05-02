@@ -4,14 +4,16 @@
       <legend><%= controller.action_name.capitalize %> Account</legend>
       <div>
         <div>
-          <%= customer_form.simple_fields_for :user do |user_form| %>
+          <%= customer_form.simple_fields_for :users do |user_form| %>
             <%= render :partial => "user_fields", :locals => { :f => user_form } %>
+            <p>user fields </p>
           <% end %>
         </div>
 
         <div>
           <div>
               <%= render :partial => "customer_fields", :locals => { :f => customer_form } %>
+              <p>customer fields </p>
           </div> 
         </div>
       </div>

@@ -12,12 +12,18 @@
     &nbsp;
   </div>
   <div class="panel clearfix">
+    <% if logged_in? && current_user.role?(:admin) %>
+      <h3>Admins:</h3>
+      <p>
+        If ou want to create a new user account, <%= link_to "click here to create a user", register_path %>
+      </p>
+    <% else %>
     <h3>Customers:</h3>
-    <p>
-      If you are a registered user, 
-      <%= link_to "click here to login", login_path %>. If you want 
-      to create an account with us, <%= link_to "please click to register", signup_path %>.
-    </p>
+      <p>
+        If you are a registered user, click the login button in the top right corner. If you want 
+        to create an account with us, <%= link_to "please click to register", signup_path %>.
+      </p>
+    <% end %>
   </div>
   <br />
 </div>
