@@ -6,6 +6,16 @@ class ItemsController < ApplicationController
     @items = Item.alphabetical.paginate(:page => params[:page]).per_page(10)
   end
 
+  def create
+    @item = Item.new(item_params)
+    
+    if @item.save
+      redirect_to items_path, notice: "The item was added to the system."
+    else
+      render action: 'new'
+    end
+  end
+
   def show
     @items_for_category = Item.for_category(@item.category).alphabetical
     @item_prices = ItemPrice.for_item(@item).chronological
@@ -37,7 +47,7 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
     end
     # Never trust parameters from the scary internet, only allow the white list through.
-    def address_params
+    def item_params
       params.require(:item).permit(:name, :description, :category, :picture, :units_per_item, :weight, :active)
     end
 end

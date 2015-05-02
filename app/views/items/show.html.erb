@@ -1,4 +1,8 @@
 <h3><%= @item.name %></h3>
+
+<% unless @item.picture.nil? %>
+  <p><%= image_tag @item.picture %></p>
+<% end %>
 <%= render partial: "item_details" %>
 
 <% if !logged_in? || (logged_in? && current_user.role?(:customer)) %>
