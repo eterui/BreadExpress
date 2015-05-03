@@ -15,7 +15,7 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
-
+    user = @customer.build_user
   end
 
   def edit
@@ -28,6 +28,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
+      session[:user_id] = @customer.user_id
       redirect_to @customer, notice: "#{@customer.proper_name} was added to the system."
     else
       render action: 'new'
@@ -50,8 +51,8 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    reset_role_param unless current_user.role? :admin
-    params.require(:customer).permit(:first_name, :last_name, :email, :phone, :active)
+    reset_role_param unless current_user && current_user.role?(:admin)
+    params.require(:customer).permit(:first_name, :last_name, :email, :phone, :active, user_attributes: [:username, :password, :password_confirmation, :role])
   end
 
   def reset_role_param

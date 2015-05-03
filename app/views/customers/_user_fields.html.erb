@@ -1,3 +1,4 @@
 <%= f.input :username %>
 <%= f.input :password %>
 <%= f.input :password_confirmation %>
+<%= f.input :role, :collection => User::ROLES, :prompt => true %>

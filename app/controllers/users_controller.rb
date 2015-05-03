@@ -6,11 +6,6 @@ class UsersController < ApplicationController
     @users = User.alphabetical.paginate(:page => params[:page]).per_page(10)
   end
 
-  # def show
-  #   @user_assignments = @user.assignments.active.by_project
-  #   @created_tasks = Task.for_creator(@user.id).by_name
-  #   @completed_tasks = Task.for_completer(@user.id).by_name
-  # end
   def show
 
   end
@@ -25,7 +20,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
       redirect_to home_path, notice: "Thank you for signing up!"
     else
       flash[:error] = "This user could not be created."
