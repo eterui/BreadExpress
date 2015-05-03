@@ -4,13 +4,15 @@ class ItemsController < ApplicationController
   
   def index
     @items = Item.alphabetical.paginate(:page => params[:page]).per_page(10)
+    @active_items = Item.active.alphabetical.paginate(:page => params[:page]).per_page(10)
+    @inactive_items = Item.inactive.alphabetical.paginate(:page => params[:page]).per_page(10)
   end
 
   def create
     @item = Item.new(item_params)
     
     if @item.save
-      redirect_to items_path, notice: "The item was added to the system."
+      redirect_to @item, notice: "#{@item.name} was added to the system."
     else
       render action: 'new'
     end
