@@ -33,6 +33,7 @@ BreadExpress::Application.routes.draw do
   get 'privacy' => 'home#privacy', as: :privacy
   get 'search' => 'home#search', as: :search
   get 'cylon' => 'errors#cylon', as: :cylon
+  get 'cart' => 'orders#cart', as: :cart
   
   # Set the root url
   root :to => 'home#home'

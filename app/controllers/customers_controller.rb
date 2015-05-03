@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   include ActionView::Helpers::NumberHelper
+  include BreadExpressHelpers::Cart
   before_action :check_login, except: [:new, :create]
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   authorize_resource
@@ -28,7 +29,10 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      session[:user_id] = @customer.user_id
+      unless logged_in?
+        session[:user_id] = @customer.user_id
+      end
+      @customer.user.role = "customer"
       redirect_to @customer, notice: "#{@customer.proper_name} was added to the system."
     else
       render action: 'new'

@@ -8,8 +8,10 @@
         <li><%= link_to "Home", home_path %></li>
         <li class="has-dropdown">
           <%= link_to "View Menu", items_path %>
-          <ul class="downdown">
-            <li><%= link_to "New Item", new_item_path %></li>
+          <ul class="dropdown">
+            <% if logged_in? && current_user.role?(:admin) %>
+              <li><%= link_to "New Item", new_item_path %></li>
+            <% end %>
           </ul>
         </li>
 
@@ -18,7 +20,11 @@
           <li class="has-dropdown">
             <%= link_to "Orders", orders_path %>
             <ul class="dropdown">
-              <li><%= link_to "My Orders", orders_path %></li>
+              <% if current_user.role?(:customer) %>
+                <li><%= link_to "My Orders", orders_path %></li>
+              <% else %>
+                <li><%= link_to "All Orders", orders_path %></li>
+              <% end %>
               <li><%= link_to "New Order", new_order_path %></li>
             </ul>
           </li>
@@ -28,15 +34,33 @@
           <li class="has-dropdown">
             <%= link_to "Addresses", addresses_path %>
             <ul class="dropdown">
-              <li><%= link_to "My Addresses", addresses_path %></li>
+              <% if current_user.role?(:customer) %>
+                <li><%= link_to "My Addresses", addresses_path %></li>
+              <% else %>
+                <li><%= link_to "All Addresses", addresses_path %></li>
+              <% end %>
               <li><%= link_to "Add an Address", new_address_path %></li>
             </ul>
           </li>
+
+          <!-- options for customers -->
+          <% if current_user.role?(:admin) %>
+            <li class="has-dropdown">
+              <%= link_to "Customers", customers_path %>
+              <ul class="dropdown">
+                <li><%= link_to "All Customers", customers_path %></li>
+                <li><%= link_to "Add a Customer", new_customer_path %></li>
+              </ul>
+            </li>
+          <% end %>
         <% end %>
       </ul>
 
       <ul class="right">
         <% if logged_in? %>
+          <% if current_user.role?(:customer) || current_user.role?(:admin) %>
+            <li><%= link_to "View Cart", cart_path %></li>
+          <% end %>
           <li><%= current_user.role.capitalize %></li>
           <li><%= link_to "Log Out", logout_path %></li>
         <% else %>

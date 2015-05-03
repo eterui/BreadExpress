@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  include BreadExpressHelpers::Cart
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   authorize_resource
   

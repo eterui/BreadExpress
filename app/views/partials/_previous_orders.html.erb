@@ -1,0 +1,13 @@
+<h4>Previous Orders</h4>
+<table class="striped">
+  <tr>
+    <th>Date</th>
+    <th>Amount</th>
+  </tr>
+  <% @previous_orders.each do |order| %>
+    <tr>
+      <td><%= order.date.strftime("%m/%d/%y") %></td>
+      <td><%= number_to_currency(order.grand_total, :unit => "$") %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+  include BreadExpressHelpers::Cart
 
   before_action :check_login
   before_action :set_order, only: [:show, :update, :destroy]
@@ -13,6 +13,10 @@ class OrdersController < ApplicationController
       @pending_orders = current_user.customer.orders.not_shipped.chronological.paginate(:page => params[:page]).per_page(5)
       @all_orders = current_user.customer.orders.chronological.paginate(:page => params[:page]).per_page(5)
     end 
+  end
+
+  def cart
+    @items_in_cart = get_list_of_items_in_cart
   end
 
   def show

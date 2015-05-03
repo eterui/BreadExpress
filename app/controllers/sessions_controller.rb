@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  include BreadExpressHelpers::Cart
   def new
   end
 

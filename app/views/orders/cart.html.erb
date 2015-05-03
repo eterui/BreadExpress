@@ -1,0 +1,24 @@
+<h2>Your Cart</h2>
+<% if @items_in_cart.empty? %>
+  <p><em>Your cart is empty.</em></p>
+<% else %>
+  
+  <table class="striped">
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+
+    <% @items_in_cart.each do |order_item| %>
+      <tr>
+        <td><%= link_to order_item.item.name, item_path(item) %></td> 
+        <td><%= order_item.quantity %></td>
+        <td><%= number_to_currency(order_item.item.current_price, :unit => "$") %></td>
+      </tr>
+    <% end %>
+  
+  </table> 
+<% end %>
+
