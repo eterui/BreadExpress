@@ -1,0 +1,21 @@
+<%= simple_form_for @order, :html => { :multipart => true } do |f| %>
+   <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    <%= f.select(:address_id, current_user.customer.addresses.active.map{|a| ["#{a.recipient} : #{a.street_1}", a.id]}, prompt: "Select Address...") %>
+    <%= f.input :credit_card_number %>
+    <div class="row">
+      <div class="col s6">
+        <%= f.input :expiration_month, collection: (1..12).to_a, prompt: "Select month" %>
+      </div>
+      <div class="col s6">
+        <%= f.input :expiration_year, collection: [2015, 2016, 2017, 2018], prompt: "Select year" %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit nil, class: 'btn' %>
+      <%= link_to 'Cancel', cart_path, :class => 'btn yellow darken-3' %>
+    </div>
+  </div>
+
+<% end %>

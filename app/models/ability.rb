@@ -13,7 +13,7 @@ class Ability
     elsif user.role? :customer
       can :read, Item
       can :manage, Order do |this_order|
-        my_orders = user.orders.map(&:id)
+        my_orders = user.customer.orders.map(&:id)
         my_orders.include? this_order.id
       end
       can :manage, Address do |this_address|

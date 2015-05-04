@@ -28,6 +28,11 @@ class OrdersController < ApplicationController
     redirect_to items_url, notice: "Added #{Item.find(params[:id]).name} to cart"
   end
 
+  def remove_item
+    @removed_item = remove_item_from_cart(params[:id])
+    redirect_to cart_url, notice: "Removed #{Item.find(params[:id]).name} from cart"
+  end
+
   def drop_cart
     destroy_cart
     create_cart
@@ -44,16 +49,30 @@ class OrdersController < ApplicationController
   end
 
   def new
-
+    @items_in_cart = get_list_of_items_in_cart
+    @subtotal = calculate_cart_items_cost
+    @shipping_cost = calculate_cart_shipping
+    @grand_total = @subtotal+@shipping_cost
+    @order = Order.new
   end
 
   def create
     @order = Order.new(order_params)
+    @order.customer = current_user.customer
+    @order.date = Date.today
+    @order.grand_total = calculate_cart_items_cost + calculate_cart_shipping
 
     if @order.save
-
+      save_each_item_in_cart(@order)
+      @order.pay
       redirect_to @order, notice: "Thank you for ordering from Bread Express."
+      destroy_cart
+      create_cart
     else
+      @items_in_cart = get_list_of_items_in_cart
+      @subtotal = calculate_cart_items_cost
+      @shipping_cost = calculate_cart_shipping
+      @grand_total = @subtotal+@shipping_cost
       render action: 'new'
     end
   end
@@ -77,7 +96,9 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:address_id)
+    params[:order][:expiration_month] = params[:order][:expiration_month].to_i
+    params[:order][:expiration_year] = params[:order][:expiration_year].to_i
+    params.require(:order).permit(:address_id, :credit_card_number, :expiration_month, :expiration_year)
   end
 
 

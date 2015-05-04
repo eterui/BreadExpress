@@ -31,6 +31,7 @@ class CustomersController < ApplicationController
     if @customer.save
       unless logged_in?
         session[:user_id] = @customer.user_id
+        create_cart
       end
       @customer.user.role = "customer"
       redirect_to @customer, notice: "#{@customer.proper_name} was added to the system."

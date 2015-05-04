@@ -1,0 +1,29 @@
+<h2>Checkout Form</h2>
+
+<h4>Items in your cart</h4>
+<div class="col s6">
+<table class="striped">
+  <tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th></th>
+  </tr>
+
+  <% @items_in_cart.each do |order_item| %>
+    <tr>
+      <td><%= order_item.item.name %></td> 
+      <td><%= order_item.quantity %></td>
+      <td><%= number_to_currency(order_item.item.current_price, :unit => "$") %></td>
+      <td><%= link_to "Remove Item", remove_item_path(order_item.item.id) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p> Subtotal: <%= number_to_currency(@subtotal, :unit => "$") %></p>
+<p> Shipping: <%= number_to_currency(@shipping_cost, :unit => "$") %></p>
+<p><b>Grand Total: <%= number_to_currency(@grand_total, :unit => "$") %></b></p>
+
+<%= render partial: "partials/display_form" %>
+
+</div>

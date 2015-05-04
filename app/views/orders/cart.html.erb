@@ -16,15 +16,15 @@
         <td><%= order_item.item.name %></td> 
         <td><%= order_item.quantity %></td>
         <td><%= number_to_currency(order_item.item.current_price, :unit => "$") %></td>
+        <td><%= link_to "Remove Item", remove_item_path(order_item.item.id) %></td>
       </tr>
     <% end %>
   
   </table> 
 
   <p> Subtotal: <%= number_to_currency(@subtotal, :unit => "$") %></p>
-  <p> Shipping: <%= number_to_currency(@shipping_cost, :unit => "$") %></p>
-  <p><b>Grand Total: <%= number_to_currency(@grand_total, :unit => "$") %></b></p>
-
-  <p><%= link_to 'Drop Cart', drop_cart_path, :class => 'btn yellow darken-3' %></p>
+  
+  <%= link_to 'Checkout', new_order_path, :class => 'btn' %>
+  <%= link_to 'Clear Cart', drop_cart_path, :class => 'btn yellow darken-3' %>
 <% end %>
 
