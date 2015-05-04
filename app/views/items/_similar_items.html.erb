@@ -2,8 +2,6 @@
   <tr>
     <th>Item</th>
     <th>Description</th>
-    <th>Category</th>
-    <th>active</th>
     <th></th>
   </tr>
 
@@ -11,8 +9,7 @@
     <tr>
      	<td><%= link_to item.name, item_path(item) %></td> 
       <td><%= item.description %></td>
-      <td><%= item.category %></td>
-      <td class="btn waves-effect yellow darken-2"><%= link_to 'Edit', edit_item_path(item) %></td>
+      <td><%= link_to "Add to Cart", add_item_path(item.id) %></td>
     </tr>
   <% end %>
   

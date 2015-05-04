@@ -13,12 +13,18 @@
 
     <% @items_in_cart.each do |order_item| %>
       <tr>
-        <td><%= link_to order_item.item.name, item_path(item) %></td> 
+        <td><%= order_item.item.name %></td> 
         <td><%= order_item.quantity %></td>
         <td><%= number_to_currency(order_item.item.current_price, :unit => "$") %></td>
       </tr>
     <% end %>
   
   </table> 
+
+  <p> Subtotal: <%= number_to_currency(@subtotal, :unit => "$") %></p>
+  <p> Shipping: <%= number_to_currency(@shipping_cost, :unit => "$") %></p>
+  <p><b>Grand Total: <%= number_to_currency(@grand_total, :unit => "$") %></b></p>
+
+  <p><%= link_to 'Drop Cart', drop_cart_path, :class => 'btn yellow darken-3' %></p>
 <% end %>
 

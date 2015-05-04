@@ -5,6 +5,8 @@
 <% end %>
 <%= render partial: "item_details" %>
 
+<br>
+
 <% if !logged_in? || (logged_in? && current_user.role?(:customer)) %>
   <h4> Similar Items </h4>
   <%= render partial: "similar_items" %>

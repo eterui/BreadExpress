@@ -16,13 +16,13 @@ class Ability
         my_orders = user.orders.map(&:id)
         my_orders.include? this_order.id
       end
-      can :read, Address do |this_address|
+      can :manage, Address do |this_address|
         my_addresses = user.addresses.map(&:id)
         my_addresses.include? this_address.id
       end
       can :read, Customer do |this_customer|
-        my_customer = user.customer.map(&:id)
-        my_customer.include? this_customer.id
+        my_customer = user.customer.id
+        my_customer == this_customer.id
       end
 
     else
