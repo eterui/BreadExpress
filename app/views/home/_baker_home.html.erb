@@ -1,1 +1,17 @@
-<p>bakers</p>
+<h2>Welcome <%= current_user.username %></h2>
+<br />
+
+<h4>Baking List</h4>
+<table class="striped">
+  <th>Item</th>
+  <th>Quantity</th>
+
+  <% @whole_list.each do |wl| %>
+    <% wl.each do |specific_item_list| %>
+      <tr>
+        <td><%= specific_item_list[0] %></td>
+        <td><%= specific_item_list[1] %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

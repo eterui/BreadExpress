@@ -6,6 +6,9 @@
 <%= render partial: "item_details" %>
 
 <br>
+<% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %>
+  <%= link_to "Add to Cart", add_item_path(@item.id), :class=> 'btn teal accent-4' %>
+<% end %>
 
 <% if !logged_in? || (logged_in? && current_user.role?(:customer)) %>
   <h4> Similar Items </h4>
@@ -15,7 +18,7 @@
 <% if logged_in? && current_user.role?(:admin) %>
   <h4> Price History </h4>
   <%= render partial: "price_history" %>
-  
+
   <%= link_to 'Change Price', new_item_price_path, :class => 'btn yellow darken-3' %>
 
 <% end %>

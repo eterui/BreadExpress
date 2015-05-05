@@ -7,6 +7,7 @@
   <th>Recipient</th>
   <th>Address</th>
   <th>Date Placed</th>
+  <th></th>
 
   <% @unshipped_orders.each do |uo| %>
     <tr>
@@ -19,6 +20,7 @@
       #{uo.address.street_2}
       #{uo.address.city}, #{uo.address.state} #{uo.address.zip}" %></td>
       <td><%= uo.date.strftime('%m/%d/%y') %></td>
+      <td><%= link_to "Order Shipped!", ship_order_path(uo.id) %></td>
     </tr>
   <% end %>
 </table>

@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   include BreadExpressHelpers::Shipping
 
   before_action :check_login
-  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :set_order, only: [:show, :ship_order, :update, :destroy]
   authorize_resource
   
   def index
@@ -37,6 +37,14 @@ class OrdersController < ApplicationController
     destroy_cart
     create_cart
     redirect_to cart_url
+  end
+
+  def ship_order
+    @order.order_items.each do |oi|
+      oi.shipped_on = Date.today
+      oi.save
+    end
+    redirect_to home_path
   end
 
   def show

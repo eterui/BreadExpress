@@ -1,1 +1,6 @@
-<p> hi</p>
+<h2><%= @user.username %></h2>
+<p><b>Role: </b><%= @user.role %></p>
+<p><b>Active: </b><%= @user.active %></p>
+<% if logged_in? && current_user.role?(:admin) %>
+  <%= link_to "Edit User", edit_user_path(@user), :class => 'btn teal accent-4' %>
+<% end %>

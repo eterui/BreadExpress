@@ -24,7 +24,8 @@
 
   <p> Subtotal: <%= number_to_currency(@subtotal, :unit => "$") %></p>
   
-  <%= link_to 'Checkout', new_order_path, :class => 'btn' %>
-  <%= link_to 'Clear Cart', drop_cart_path, :class => 'btn yellow darken-3' %>
+  <%= link_to 'Checkout', new_order_path, :class => 'btn teal accent-4' %>
+  <%= link_to 'Clear Cart', drop_cart_path, :class => 'btn orange lighten-3' %>
+  
 <% end %>
 

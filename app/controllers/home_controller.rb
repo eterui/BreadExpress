@@ -5,6 +5,10 @@ class HomeController < ApplicationController
 
   def home
     @unshipped_orders = Order.chronological.not_shipped.reverse_each
+    @muffins_baking_list = create_baking_list_for("muffins")
+    @bread_baking_list = create_baking_list_for("bread")
+    @pastries_baking_list = create_baking_list_for("pastries")
+    @whole_list = [@muffins_baking_list, @bread_baking_list, @pastries_baking_list]
 
   end
 

@@ -15,5 +15,9 @@
     </div>
   </div>
 
-  <div class="actions"><%= submit_tag "Log In" %></div>
+  <div class="actions">
+    <%= submit_tag "Log In", :class => 'btn teal accent-4' %>
+    <%= link_to 'Cancel', home_path, :class => 'btn orange lighten-3' %>
+  </div>
+
 <% end %>
