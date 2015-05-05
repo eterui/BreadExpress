@@ -24,6 +24,9 @@ class Ability
         my_customer = user.customer.id
         my_customer == this_customer.id
       end
+    elsif user.role? :shipper
+      can :manage, :all
+
 
     else
       can :read, Item

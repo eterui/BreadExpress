@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @items_for_category = Item.for_category(@item.category).alphabetical
+    @items_for_category = Item.active.for_category(@item.category).alphabetical
     @item_prices = ItemPrice.for_item(@item).chronological
   end
 
@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :category, :picture, :units_per_item, :weight, :active)
+      params.require(:item).permit(:name, :description, :category, :picture, :units_per_item, :weight, :active, item_price_attributes: [:price, :start_date])
     end
 end
 

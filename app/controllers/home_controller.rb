@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   #PUT BAKING LIST AND SHIPPING LIST DASHBOARD HERE OR CHANGE WHERE THEY REDIRECT TO
 
   def home
-
+    @unshipped_orders = Order.chronological.not_shipped.reverse_each
 
   end
 

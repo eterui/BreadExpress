@@ -1,5 +1,9 @@
 BreadExpress::Application.routes.draw do
 
+  get "item_prices/show"
+  get "item_prices/edit"
+  get "item_prices/update"
+  get "item_prices/destroy"
   get "sessions/new"
   get "sessions/create"
   get "sessions/destroy"

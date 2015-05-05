@@ -1,0 +1,24 @@
+<h2>Welcome <%= current_user.username %></h2>
+<br />
+
+<h4>Shipping List</h4>
+<table class="striped">
+  <th>Item</th>
+  <th>Recipient</th>
+  <th>Address</th>
+  <th>Date Placed</th>
+
+  <% @unshipped_orders.each do |uo| %>
+    <tr>
+      <td>
+        <% uo.order_items.unshipped.each do |uoi| %>
+          <ul><%= uoi.item.name %></ul>
+        <% end %>
+      <td><%= uo.address.recipient %></td>
+      <td><%= "#{uo.address.street_1}
+      #{uo.address.street_2}
+      #{uo.address.city}, #{uo.address.state} #{uo.address.zip}" %></td>
+      <td><%= uo.date.strftime('%m/%d/%y') %></td>
+    </tr>
+  <% end %>
+</table>

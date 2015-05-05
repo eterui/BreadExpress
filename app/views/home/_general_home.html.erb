@@ -15,7 +15,7 @@
     <% if logged_in? && current_user.role?(:admin) %>
       <h3>Admins:</h3>
       <p>
-        If ou want to create a new user account, <%= link_to "click here to create a user", register_path %>
+        If you want to create a new user account, <%= link_to "click here to create a user", register_path %>
       </p>
     <% else %>
     <h3>Customers:</h3>

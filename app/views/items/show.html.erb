@@ -15,6 +15,9 @@
 <% if logged_in? && current_user.role?(:admin) %>
   <h4> Price History </h4>
   <%= render partial: "price_history" %>
+  
+  <%= link_to 'Change Price', new_item_price_path, :class => 'btn yellow darken-3' %>
+
 <% end %>
 
 <br>
