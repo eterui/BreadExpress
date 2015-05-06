@@ -55,7 +55,10 @@
           <% if current_user.role?(:customer) || current_user.role?(:admin) %>
             <li><%= link_to "View Cart", cart_path %></li>
           <% end %>
-          <li><%= current_user.role.capitalize %></li>
+          <% if current_user.role?(:customer) %>
+            <li><%= link_to current_user.customer.first_name, customer_path(current_user.customer) %></li>
+          <% end %>
+
           <li><%= link_to "Log Out", logout_path %></li>
         <% else %>
           <li><%= link_to "Register", new_customer_path %></li>

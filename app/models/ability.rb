@@ -20,7 +20,7 @@ class Ability
         my_addresses = user.customer.addresses.map(&:id)
         my_addresses.include? this_address.id
       end
-      can :read, Customer do |this_customer|
+      can :show, Customer do |this_customer|
         my_customer = user.customer.id
         my_customer == this_customer.id
       end
