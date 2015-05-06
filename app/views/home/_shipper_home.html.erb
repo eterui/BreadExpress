@@ -2,6 +2,9 @@
 <br />
 
 <h4>Shipping List</h4>
+<% if @unshipped_orders_backwards.empty? %>
+  <p><em>No orders to ship today!</em></p>
+<% else %>
 <table class="striped">
   <th>Item</th>
   <th>Recipient</th>
@@ -24,3 +27,4 @@
     </tr>
   <% end %>
 </table>
+<% end %>

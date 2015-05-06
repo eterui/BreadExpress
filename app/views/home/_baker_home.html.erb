@@ -1,17 +1,21 @@
 <h2>Welcome <%= current_user.username %></h2>
 <br />
 
+<% if @bread_baking_list.empty? && @pastries_baking_list.empty? && @muffins_baking_list.empty? %>
+  <p><em>No items to bake today!</em></p>
+<% else %>
 <h4>Baking List</h4>
-<table class="striped">
-  <th>Item</th>
-  <th>Quantity</th>
+  <table class="striped">
+    <th>Item</th>
+    <th>Quantity</th>
 
-  <% @whole_list.each do |wl| %>
-    <% wl.each do |specific_item_list| %>
-      <tr>
-        <td><%= specific_item_list[0] %></td>
-        <td><%= specific_item_list[1] %></td>
-      </tr>
+    <% @whole_list.each do |wl| %>
+      <% wl.each do |specific_item_list| %>
+        <tr>
+          <td><%= specific_item_list[0] %></td>
+          <td><%= specific_item_list[1] %></td>
+        </tr>
+      <% end %>
     <% end %>
-  <% end %>
-</table>
+  </table>
+<% end %>
