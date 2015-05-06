@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.alphabetical.paginate(:page => params[:page]).per_page(10)
+    @active_employees = User.alphabetical.employees.active.paginate(:page => params[:page]).per_page(10)
+    @inactive_employees = User.alphabetical.employees.inactive.paginate(:page => params[:page]).per_page(10)
   end
 
   def show
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:notice] = "#{@user.proper_name} is updated."
+      flash[:notice] = "#{@user.username} is updated."
       redirect_to @user
     else
       render :action => 'edit'
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    flash[:notice] = "Successfully removed #{@user.proper_name} from Bread Express."
+    flash[:notice] = "Successfully removed #{@user.username} from Bread Express."
     redirect_to users_url
   end
 

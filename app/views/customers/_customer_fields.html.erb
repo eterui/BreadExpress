@@ -2,3 +2,6 @@
 <%= f.input :last_name %>
 <%= f.input :email %>
 <%= f.input :phone %>
+<% if logged_in? && current_user.role?(:admin) %>
+  <%= f.input :active %>
+<% end %>

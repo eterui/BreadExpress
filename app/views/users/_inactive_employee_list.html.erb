@@ -1,0 +1,17 @@
+<% if @inactive_employees.empty? %>
+  <p><em>No registered inactive employees</em></p>
+<% else %>
+<h4>Inactive Employee List</h4>
+<table class="striped">
+  <th>Username</th>
+  <th>Role</th>
+
+  <% @inactive_employees.each do |employee| %>
+    <tr>
+      <td><%= link_to employee.username, user_path(employee) %></td>
+      <td><%= employee.role %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @inactive_employees, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>

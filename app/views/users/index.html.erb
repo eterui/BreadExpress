@@ -1,0 +1,6 @@
+<% if logged_in? && current_user.role?(:admin) %>
+  <%= render partial: "active_employee_list" %>
+  <%= render partial: "inactive_employee_list" %>
+<% else %>
+  <p><em>You shouldn't be seeing this</em></p>
+<% end %>

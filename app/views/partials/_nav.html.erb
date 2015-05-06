@@ -57,6 +57,8 @@
           <% end %>
           <% if current_user.role?(:customer) %>
             <li><%= link_to current_user.customer.first_name, customer_path(current_user.customer) %></li>
+          <% else %>
+            <li><%= current_user.username %></li>
           <% end %>
 
           <li><%= link_to "Log Out", logout_path %></li>
