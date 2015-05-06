@@ -21,7 +21,7 @@
     <% else %>
     <h3>Customers:</h3>
       <p>
-        If you are a registered user, click the login button in the top right corner. If you want 
+        If you are a registered user, <%= link_to "click here to log in", login_path %>. If you want 
         to create an account with us, <%= link_to "please click to register", signup_path %>.
       </p>
     <% end %>

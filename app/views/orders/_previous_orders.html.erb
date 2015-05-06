@@ -14,7 +14,7 @@
         <tr>
           <td><%= link_to order.date.strftime('%m/%d/%y'), order_path(order) %></td>
           <td><%= number_to_currency order.grand_total %></td>
-          <td><%= order.address.recipient %></td>
+          <td><%= link_to order.address.recipient, address_path(order.address) %></td>
         </tr>
       <% end %>
     </table>

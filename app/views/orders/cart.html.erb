@@ -1,6 +1,7 @@
 <h2>Your Cart</h2>
 <% if @items_in_cart.empty? %>
   <p><em>Your cart is empty.</em></p>
+  <%= link_to "Click here to browse items", items_path %>
 <% else %>
   
   <table class="striped">

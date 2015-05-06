@@ -17,7 +17,7 @@ class Ability
         my_orders.include? this_order.id
       end
       can :manage, Address do |this_address|
-        my_addresses = user.addresses.map(&:id)
+        my_addresses = user.customer.addresses.map(&:id)
         my_addresses.include? this_address.id
       end
       can :read, Customer do |this_customer|
@@ -25,7 +25,10 @@ class Ability
         my_customer == this_customer.id
       end
     elsif user.role? :shipper
-      can :manage, :all
+      can :manage, Order do |this_order|
+        unshipped_orders = Order.not_shipped.map(&:id)
+        unshipped_orders.include? this_order.id
+      end
 
 
     else

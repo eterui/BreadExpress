@@ -16,7 +16,7 @@
           <td><%= link_to order.address.recipient, address_path(order.address) %></td>
           <td>
             <% order.order_items.each do |oi| %>
-              <%= oi.quantity %> <%= oi.item.name %><br />
+              <%= oi.quantity %> <%= link_to oi.item.name, item_path(oi.item) %><br />
             <% end %>
           </td>
           <td><%= number_to_currency order.grand_total %></td>
